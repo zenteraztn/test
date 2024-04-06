@@ -1,0 +1,22 @@
+import requests
+
+def get_repo_details(username, repo_name):
+    """Fetches details about a GitHub repository."""
+    url = f"https://api.github.com/repos/{username}/{repo_name}"
+    response = requests.get(url)
+    
+    if response.status_code == 200:
+        repo_details = response.json()
+        print(f"Repository Name: {repo_details['name']}")
+        print(f"Description: {repo_details['description']}")
+        print(f"Git URL: {repo_details['git_url']}")
+        print(f"Stars: {repo_details['stargazers_count']}")
+        print(f"Forks: {repo_details['forks_count']}")
+    else:
+        print("Failed to fetch repository details.")
+
+# Example usage
+if __name__ == "__main__":
+    username = "octocat"  # Example GitHub username
+    repo_name = "Hello-World"  # Example repository name
+    get_repo_details(username, repo_name)
